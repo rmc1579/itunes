@@ -23,8 +23,19 @@ app.controller('mainCtrl', function($scope, itunesService){
   //First inject itunesService into your controller.
 
     //code here
+    
+    $scope.getSongData = function(){
+        
+        itunesService.searchArtist($scope.artist).then(function(song){ //then executes after response finished from service
+            $scope.songData = song; //this inside fuction executes after getting data from response service.
+            $scope.show = true; 
+        });
+        
+        
+        
+    };
 
-
+    //$scope.getSongData();
   //Now write a function that will call the method on the itunesService that is responsible for getting the data from iTunes, whenever the user clicks the submit button
   //*remember, that method should be expecting an artist name. The artist name is coming from the input box on index.html, head over there and check if that input box is tied to any specific model we could use.
   //Also note that that method should be retuning a promise, so you could use .then in this function.
@@ -35,7 +46,7 @@ app.controller('mainCtrl', function($scope, itunesService){
   //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
 
     //Code here
-
+    
 
   //If everything worked you should see a huge array of objects inside your console. That's great! But unfortunately that's not what ng-grid is expecting. What you need to do now
   //is sort the data you got back to be an object in the following format.
